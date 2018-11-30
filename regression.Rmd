@@ -1,0 +1,33 @@
+---
+title: "Regression"
+author: "Khoirul Amri"
+date: "November 30, 2018"
+output: html_document
+---
+
+```{r}
+motorcars <- read.csv("https://vincentarelbundock.github.io/Rdatasets/csv/datasets/mtcars.csv", stringsAsFactors = FALSE)
+
+head(motorcars)
+```
+#regression
+```{r}
+library(ggplot2)
+model <- lm(motorcars$wt ~ motorcars$mpg, data = motorcars)
+summary(model)$coef
+
+ggplot(motorcars, aes(x=motorcars$wt, y=motorcars$mpg))+
+  geom_point(alpha=0.3, color="red", size=5) +
+  stat_smooth()
+
+```
+#prediction
+```{r}
+predictions <- model %>% predict(motorcars)
+predictions
+
+actual <- c(1.1, 1.9, 3.0, 4.4, 5.0, 5.6)
+predicted <- c(0.9, 1.8, 2.5, 4.5, 5.0, 6.2)
+```
+
+
